@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
   resources :stats
-  resources :admins
+  resources :admins, only: [:new, :create, :show]
+  resource :session, only: [:new, :create, :destroy]  # For login/logout
+  
+  root 'admins#new'  # You can change this to wherever you want your root page to be
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

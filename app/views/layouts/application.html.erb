@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NameApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Stats App</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+</head>
+<body>
+  <nav>
+    <% if session[:admin_id] %>
+      <!-- Show the logout link if the user is logged in -->
+      <%= link_to 'Logout', root_path, method: :delete %>
+    <% else %>
+      <!-- Show the login link if the user is not logged in -->
+      <%= link_to 'Login', new_session_path %>
+    <% end %>
+  </nav>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <%= yield %>
+</body>
 </html>

@@ -1,70 +1,30 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:show]
 
-  # GET /admins or /admins.json
-  def index
-    @admins = Admin.all
-  end
 
-  # GET /admins/1 or /admins/1.json
-  def show
-  end
 
-  # GET /admins/new
-  def new
-    @admin = Admin.new
-  end
 
-  # GET /admins/1/edit
-  def edit
-  end
-
-  # POST /admins or /admins.json
-  def create
-    @admin = Admin.new(admin_params)
-
-    respond_to do |format|
+    # Display the signup form
+    def new
+      @admin = Admin.new
+    end
+  
+    # Handle the signup form submission
+    def create
+      @admin = Admin.new(admin_params)
+      @admin.sign_up_date = Time.now  # Set the signup date
+  
       if @admin.save
-        format.html { redirect_to @admin, notice: "Admin was successfully created." }
-        format.json { render :show, status: :created, location: @admin }
+        redirect_to stats_path(@admin), notice: "Admin created successfully."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
+        render :new
       end
     end
-  end
-
-  # PATCH/PUT /admins/1 or /admins/1.json
-  def update
-    respond_to do |format|
-      if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: "Admin was successfully updated." }
-        format.json { render :show, status: :ok, location: @admin }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /admins/1 or /admins/1.json
-  def destroy
-    @admin.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin
-      @admin = Admin.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
+  
+    private
+  
+    # Strong parameters to allow only necessary attributes for admin creation
     def admin_params
-      params.require(:admin).permit(:username, :password, :email, :sign_up_date)
+      params.require(:admin).permit(:username, :email, :password, :password_confirmation)
     end
-end
+  end
