@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+/* application.scss */
+body {
+    background-image: url('https://www.example.com/your-background-image.jpg'); /* Your image URL */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* This makes the background stay fixed while scrolling */
+    height: 100vh; /* Full height */
+    color: white; /* White text by default */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: white; /* Heading text color */
+  }
+  
+  /* Optional: Add some padding to the form */
+  .form-container {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white background for the form */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  }
+  
+  .btn-link {
+    color: white !important; /* Ensure the login link is white */
+    font-size: 14px;
+  }
+  
+  /* Ensure the form is centered */
+  .form-container {
+    width: 100%;
+    max-width: 500px;
+  }

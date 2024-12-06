@@ -2,8 +2,12 @@ class StatsController < ApplicationController
   before_action :set_stat, only: %i[ show edit update destroy ]
 
   # GET /stats or /stats.json
-  def index
-    @stats = Stat.all
+  class StatsController < ApplicationController
+    def index
+      @stats = Stat.all
+      @solutions = @stats.pluck(:solution)
+      @labels = @stats.pluck(:title)
+    end
   end
 
   # GET /stats/1 or /stats/1.json

@@ -10,5 +10,11 @@
     </p>
   <% end %>
 </div>
+<%= javascript_include_tag "application" %>
 
+<div>
+  <canvas id="solutionsChart" 
+          data-solutions="<%= @solutions.to_json %>" 
+          data-labels="<%= @labels.to_json %>"></canvas>
+</div>
 <%= link_to "New stat", new_stat_path %>
